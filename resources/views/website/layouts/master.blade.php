@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from bestwebcreator.com/shopwise/demo/index-6.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 May 2025 06:21:53 GMT -->
 <head>
     <!-- Meta -->
     <meta charset="utf-8">
@@ -12,22 +10,21 @@
     <meta name="keywords" content="ecommerce, electronics store, Fashion store, furniture store,  bootstrap 4, clean, minimal, modern, online store, responsive, retail, shopping, ecommerce store">
 
     <!-- SITE TITLE -->
-    <title>Shopwise - @yield('title')</title>
+    <title> @yield('title')</title>
 
     @include('website.layouts.links')
 
 </head>
-
 <body>
 
 <!-- LOADER -->
-<div class="preloader">
-    <div class="lds-ellipsis">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-</div>
+{{--<div class="preloader">--}}
+{{--    <div class="lds-ellipsis">--}}
+{{--        <span></span>--}}
+{{--        <span></span>--}}
+{{--        <span></span>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <!-- END LOADER -->
 
 {{--<!-- Home Popup Section -->--}}

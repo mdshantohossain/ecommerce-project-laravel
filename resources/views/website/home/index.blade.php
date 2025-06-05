@@ -107,62 +107,16 @@
                 <div class="row align-items-center">
                     <div class="col-12">
                         <div class="cat_slider cat_style1 mt-4 mt-md-0 carousel_slider owl-carousel owl-theme nav_style5" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "2"}, "480":{"items": "3"}, "576":{"items": "4"}, "768":{"items": "5"}, "991":{"items": "6"}, "1199":{"items": "7"}}'>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img1.png" alt="cat_img1"/>
-                                        <span>Television</span>
-                                    </a>
+                            @foreach($categories as $category)
+                                <div class="item">
+                                    <div class="categories_box">
+                                        <a href="#">
+                                            <img src="{{ $category->image }}" height="120" width="80" alt="cat_img1"/>
+                                            <span>{{ $category->name }}</span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img2.png" alt="cat_img2"/>
-                                        <span>Mobile</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img3.png" alt="cat_img3"/>
-                                        <span>Headphone</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img4.png" alt="cat_img4"/>
-                                        <span>Watch</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img5.png" alt="cat_img5"/>
-                                        <span>Game</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img6.png" alt="cat_img6"/>
-                                        <span>Camera</span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="categories_box">
-                                    <a href="#">
-                                        <img src="{{asset('/')}}website/assets/images/cat_img7.png" alt="cat_img7"/>
-                                        <span>Audio</span>
-                                    </a>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -201,228 +155,50 @@
                         </div>
                         <div class="tab_slider tab-content">
                             <div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
-                                <div class="product_slider carousel_slider owl-carousel owl-theme dot_style1" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}'>
-                                    <div class="item">
-                                        <div class="product_wrap">
-                                            <div class="product_img">
-                                                <a href="shop-product-detail.html">
-                                                    <img src="{{asset('/')}}website/assets/images/el_img1.jpg" alt="el_img1">
-                                                    <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img1.jpg" alt="el_hover_img1">
-                                                </a>
-                                                <div class="product_action_box">
-                                                    <ul class="list_none pr_action_btn">
-                                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                        <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                        <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_title"><a href="shop-product-detail.html">Red & Black Headphone</a></h6>
-                                                <div class="product_price">
-                                                    <span class="price">$45.00</span>
-                                                    <del>$55.25</del>
-                                                    <div class="on_sale">
-                                                        <span>35% Off</span>
+                                <div id="product_box" class="product_slider carousel_slider owl-carousel owl-theme dot_style1" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}'>
+                                    @foreach($products as $product)
+                                        <div class="item">
+                                            <div class="product_wrap">
+                                                <div class="product_img">
+                                                    <a href="{{ route('product.detail', $product->id) }}">
+                                                        <img src="{{ $product->main_image }}" height="220" class="rounded-2" alt="el_img1">
+                                                        @if(isset($product?->otherImages[1]))
+                                                            <img class="product_hover_img" src="{{ $product?->otherImages[1]->image }}" alt="el_hover_img1">
+                                                        @endif
+                                                    </a>
+                                                    <div class="product_action_box">
+                                                        <ul class="list_none pr_action_btn">
+                                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                                            <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
+                                                            <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:80%"></div>
+                                                <div class="product_info">
+                                                    <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a></h6>
+                                                    <div class="product_price">
+                                                        <span class="price">Tk.{{ $product->selling_price }}</span>
+                                                        <del>Tk.{{ $product->regular_price }}</del>
+                                                        @if($product->discount)
+                                                            <div class="on_sale">
+                                                                <span>{{ $product->discount }} Off</span>
+                                                            </div>
+                                                        @endif
                                                     </div>
-                                                    <span class="rating_num">(21)</span>
-                                                </div>
-                                                <div class="pr_desc">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                                    <div class="rating_wrap">
+                                                        <div class="rating">
+                                                            <div class="product_rate" style="width:80%"></div>
+                                                        </div>
+                                                        <span class="rating_num">(21)</span>
+                                                    </div>
+                                                    <div class="pr_desc">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product_wrap">
-                                            <div class="product_img">
-                                                <a href="shop-product-detail.html">
-                                                    <img src="{{asset('/')}}website/assets/images/el_img2.jpg" alt="el_img2">
-                                                    <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img2.jpg" alt="el_hover_img2">
-                                                </a>
-                                                <div class="product_action_box">
-                                                    <ul class="list_none pr_action_btn">
-                                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                        <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                        <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_title"><a href="shop-product-detail.html">Smart Watch External</a></h6>
-                                                <div class="product_price">
-                                                    <span class="price">$55.00</span>
-                                                    <del>$95.00</del>
-                                                    <div class="on_sale">
-                                                        <span>25% Off</span>
-                                                    </div>
-                                                </div>
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:68%"></div>
-                                                    </div>
-                                                    <span class="rating_num">(15)</span>
-                                                </div>
-                                                <div class="pr_desc">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product_wrap">
-                                            <span class="pr_flash">New</span>
-                                            <div class="product_img">
-                                                <a href="shop-product-detail.html">
-                                                    <img src="{{asset('/')}}website/assets/images/el_img3.jpg" alt="el_img3">
-                                                    <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img3.jpg" alt="el_hover_img3">
-                                                </a>
-                                                <div class="product_action_box">
-                                                    <ul class="list_none pr_action_btn">
-                                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                        <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                        <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_title"><a href="shop-product-detail.html">Nikon HD camera</a></h6>
-                                                <div class="product_price">
-                                                    <span class="price">$68.00</span>
-                                                    <del>$99.00</del>
-                                                </div>
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:87%"></div>
-                                                    </div>
-                                                    <span class="rating_num">(25)</span>
-                                                </div>
-                                                <div class="pr_desc">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product_wrap">
-                                            <div class="product_img">
-                                                <a href="shop-product-detail.html">
-                                                    <img src="{{asset('/')}}website/assets/images/el_img4.jpg" alt="el_img4">
-                                                    <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img4.jpg" alt="el_hover_img4">
-                                                </a>
-                                                <div class="product_action_box">
-                                                    <ul class="list_none pr_action_btn">
-                                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                        <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                        <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_title"><a href="shop-product-detail.html">Audio Equipment</a></h6>
-                                                <div class="product_price">
-                                                    <span class="price">$69.00</span>
-                                                    <del>$89.00</del>
-                                                    <div class="on_sale">
-                                                        <span>20% Off</span>
-                                                    </div>
-                                                </div>
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:70%"></div>
-                                                    </div>
-                                                    <span class="rating_num">(22)</span>
-                                                </div>
-                                                <div class="pr_desc">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product_wrap">
-                                            <div class="product_img">
-                                                <a href="shop-product-detail.html">
-                                                    <img src="{{asset('/')}}website/assets/images/el_img5.jpg" alt="el_img5">
-                                                    <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img5.jpg" alt="el_hover_img5">
-                                                </a>
-                                                <div class="product_action_box">
-                                                    <ul class="list_none pr_action_btn">
-                                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                        <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                        <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_title"><a href="shop-product-detail.html">Smart Televisions</a></h6>
-                                                <div class="product_price">
-                                                    <span class="price">$45.00</span>
-                                                    <del>$55.25</del>
-                                                    <div class="on_sale">
-                                                        <span>35% Off</span>
-                                                    </div>
-                                                </div>
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:80%"></div>
-                                                    </div>
-                                                    <span class="rating_num">(21)</span>
-                                                </div>
-                                                <div class="pr_desc">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="product_wrap">
-                                            <span class="pr_flash bg-danger">Hot</span>
-                                            <div class="product_img">
-                                                <a href="shop-product-detail.html">
-                                                    <img src="{{asset('/')}}website/assets/images/el_img6.jpg" alt="el_img6">
-                                                    <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img6.jpg" alt="el_hover_img6">
-                                                </a>
-                                                <div class="product_action_box">
-                                                    <ul class="list_none pr_action_btn">
-                                                        <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                        <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                        <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                        <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_title"><a href="shop-product-detail.html">Samsung Smart Phone</a></h6>
-                                                <div class="product_price">
-                                                    <span class="price">$55.00</span>
-                                                    <del>$95.00</del>
-                                                    <div class="on_sale">
-                                                        <span>25% Off</span>
-                                                    </div>
-                                                </div>
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:68%"></div>
-                                                    </div>
-                                                    <span class="rating_num">(15)</span>
-                                                </div>
-                                                <div class="pr_desc">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
@@ -1143,228 +919,49 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="product_slider carousel_slider owl-carousel owl-theme dot_style1" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}'>
-                            <div class="item">
-                                <div class="product_wrap">
-                                    <div class="product_img">
-                                        <a href="shop-product-detail.html">
-                                            <img src="{{asset('/')}}website/assets/images/el_img2.jpg" alt="el_img2">
-                                            <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img2.jpg" alt="el_hover_img2">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="shop-product-detail.html">Smart Watch External</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">$55.00</span>
-                                            <del>$95.00</del>
-                                            <div class="on_sale">
-                                                <span>25% Off</span>
+                            @foreach($trendingProducts as $product)
+                                <div class="item">
+                                    <div class="product_wrap">
+                                        <div class="product_img">
+                                            <a href="{{ route('product.detail', $product->id) }}">
+                                                <img src="{{ $product->main_image }}" height="220" class="rounded-2" alt="el_img1">
+                                                @if(isset($product?->otherImages[1]))
+                                                    <img class="product_hover_img" src="{{ $product?->otherImages[1]->image }}" alt="el_hover_img1">
+                                                @endif
+                                            </a>
+                                            <div class="product_action_box">
+                                                <ul class="list_none pr_action_btn">
+                                                    <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                                    <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
+                                                    <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                    <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:68%"></div>
+                                        <div class="product_info">
+                                            <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a></h6>
+                                            <div class="product_price">
+                                                <span class="price">Tk.{{ $product->selling_price }}</span>
+                                                <del>Tk.{{ $product->regular_price }}</del>
+                                                @if($product->discount)
+                                                    <div class="on_sale">
+                                                        <span>{{ $product->discount }} Off</span>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            <span class="rating_num">(15)</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product_wrap">
-                                    <div class="product_img">
-                                        <a href="shop-product-detail.html">
-                                            <img src="{{asset('/')}}website/assets/images/el_img5.jpg" alt="el_img5">
-                                            <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img5.jpg" alt="el_hover_img5">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="shop-product-detail.html">Smart Televisions</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">$45.00</span>
-                                            <del>$55.25</del>
-                                            <div class="on_sale">
-                                                <span>35% Off</span>
+                                            <div class="rating_wrap">
+                                                <div class="rating">
+                                                    <div class="product_rate" style="width:80%"></div>
+                                                </div>
+                                                <span class="rating_num">(21)</span>
                                             </div>
-                                        </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:80%"></div>
+                                            <div class="pr_desc">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
                                             </div>
-                                            <span class="rating_num">(21)</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="product_wrap">
-                                    <div class="product_img">
-                                        <a href="shop-product-detail.html">
-                                            <img src="{{asset('/')}}website/assets/images/el_img9.jpg" alt="el_img9">
-                                            <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img9.jpg" alt="el_hover_img9">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="shop-product-detail.html">oppo Reno3 Pro</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">$68.00</span>
-                                            <del>$99.00</del>
-                                            <div class="on_sale">
-                                                <span>20% Off</span>
-                                            </div>
-                                        </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:87%"></div>
-                                            </div>
-                                            <span class="rating_num">(25)</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product_wrap">
-                                    <div class="product_img">
-                                        <a href="shop-product-detail.html">
-                                            <img src="{{asset('/')}}website/assets/images/el_img7.jpg" alt="el_img7">
-                                            <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img7.jpg" alt="el_hover_img7">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="shop-product-detail.html">Audio Theaters</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">$45.00</span>
-                                            <del>$55.25</del>
-                                            <div class="on_sale">
-                                                <span>35% Off</span>
-                                            </div>
-                                        </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:80%"></div>
-                                            </div>
-                                            <span class="rating_num">(21)</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product_wrap">
-                                    <div class="product_img">
-                                        <a href="shop-product-detail.html">
-                                            <img src="{{asset('/')}}website/assets/images/el_img5.jpg" alt="el_img5">
-                                            <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img5.jpg" alt="el_hover_img5">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="shop-product-detail.html">Smart Televisions</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">$45.00</span>
-                                            <del>$55.25</del>
-                                            <div class="on_sale">
-                                                <span>35% Off</span>
-                                            </div>
-                                        </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:80%"></div>
-                                            </div>
-                                            <span class="rating_num">(21)</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="product_wrap">
-                                    <div class="product_img">
-                                        <a href="shop-product-detail.html">
-                                            <img src="{{asset('/')}}website/assets/images/el_img12.jpg" alt="el_img12">
-                                            <img class="product_hover_img" src="{{asset('/')}}website/assets/images/el_hover_img12.jpg" alt="el_hover_img12">
-                                        </a>
-                                        <div class="product_action_box">
-                                            <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="shop-product-detail.html">Sound Equipment for Low</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">$45.00</span>
-                                            <del>$55.25</del>
-                                            <div class="on_sale">
-                                                <span>35% Off</span>
-                                            </div>
-                                        </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:80%"></div>
-                                            </div>
-                                            <span class="rating_num">(21)</span>
-                                        </div>
-                                        <div class="pr_desc">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -1448,79 +1045,7 @@
         </div>
         <!-- END SECTION TESTIMONIAL -->
 
-        <!-- START SECTION BLOG -->
-        <div class="section pb_20">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md-8">
-                        <div class="heading_s1 text-center">
-                            <h2>Latest News</h2>
-                        </div>
-                        <p class="leads text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog_post blog_style2 box_shadow1">
-                            <div class="blog_img">
-                                <a href="blog-single.html">
-                                    <img src="{{asset('/')}}website/assets/images/el_blog_img1.jpg" alt="el_blog_img1">
-                                </a>
-                            </div>
-                            <div class="blog_content bg-white">
-                                <div class="blog_text">
-                                    <h5 class="blog_title"><a href="blog-single.html">But I must explain to you how all this mistaken idea</a></h5>
-                                    <ul class="list_none blog_meta">
-                                        <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>
-                                        <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>
-                                    </ul>
-                                    <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything hidden in the text</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog_post blog_style2 box_shadow1">
-                            <div class="blog_img">
-                                <a href="blog-single.html">
-                                    <img src="{{asset('/')}}website/assets/images/el_blog_img2.jpg" alt="el_blog_img2">
-                                </a>
-                            </div>
-                            <div class="blog_content bg-white">
-                                <div class="blog_text">
-                                    <h5 class="blog_title"><a href="blog-single.html">On the other hand we provide denounce with righteous</a></h5>
-                                    <ul class="list_none blog_meta">
-                                        <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>
-                                        <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>
-                                    </ul>
-                                    <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything hidden in the text</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog_post blog_style2 box_shadow1">
-                            <div class="blog_img">
-                                <a href="blog-single.html">
-                                    <img src="{{asset('/')}}website/assets/images/el_blog_img3.jpg" alt="el_blog_img2">
-                                </a>
-                            </div>
-                            <div class="blog_content bg-white">
-                                <div class="blog_text">
-                                    <h5 class="blog_title"><a href="blog-single.html">Why is a ticket to Lagos so expensive?</a></h5>
-                                    <ul class="list_none blog_meta">
-                                        <li><a href="#"><i class="ti-calendar"></i> April 14, 2018</a></li>
-                                        <li><a href="#"><i class="ti-comments"></i> 2 Comment</a></li>
-                                    </ul>
-                                    <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything hidden in the text</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- END SECTION BLOG -->
+
 
         <!-- START SECTION CLIENT LOGO -->
         <div class="section small_pt">
@@ -1592,8 +1117,65 @@
             </div>
         </div>
         <!-- START SECTION SUBSCRIBE NEWSLETTER -->
-
     </div>
     <!-- END MAIN CONTENT -->
-
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            window.Echo
+                .channel('product')
+                .listen('.product.create', function({ product }) {
+                    console.log(product)
+                    let cardBody = document.querySelector('#product-box');
+
+                    let item = `
+                <div class="item">
+                    <div class="product_wrap">
+                        <div class="product_img">
+                            <a href="/product-detail/${product.id}">
+                                <img src="${product.main_image}" height="220" class="rounded-2" alt="el_img1">
+                                <img class="product_hover_img" src="${product.otherImages?.[1]?.image || 'https://via.placeholder.com/150'}" alt="el_hover_img1">
+                            </a>
+                            <div class="product_action_box">
+                                <ul class="list_none pr_action_btn">
+                                    <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
+                                    <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
+                                    <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                    <li><a href="#"><i class="icon-heart"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product_info">
+                            <h6 class="product_title">
+                                <a href="/product-detail/${product.id}">${product.name}</a>
+                            </h6>
+                            <div class="product_price">
+                                <span class="price">Tk.${product.selling_price}</span>
+                                <del>Tk.${product.regular_price}</del>
+                                ${product.discount ? `
+                                    <div class="on_sale">
+                                        <span>${product.discount} Off</span>
+                                    </div>` : ''}
+                            </div>
+                            <div class="rating_wrap">
+                                <div class="rating">
+                                    <div class="product_rate" style="width:80%"></div>
+                                </div>
+                                <span class="rating_num">(21)</span>
+                            </div>
+                            <div class="pr_desc">
+                                <p>${product.description || 'No description available.'}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                    let $itemElement = $($.parseHTML(item));
+                    $('#product_box').trigger('add.owl.carousel', [$itemElement]).trigger('refresh.owl.carousel');
+                });
+        });
+    </script>
+@endpush

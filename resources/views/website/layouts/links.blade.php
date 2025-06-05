@@ -27,6 +27,29 @@
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/style.css">
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/responsive.css">
 
+<style>
+    /* Customize toastr success */
+    .toast-success {
+        background-color: #556ee6 !important; /* Bootstrap green */
+        font-size: 15px;
+    }
+
+    /* Customize toastr error */
+    .toast-error {
+        background-color: #dc3545 !important; /* Bootstrap red */
+        font-size: 15px;
+    }
+
+    /* Add some border radius and shadow */
+    .toast {
+        border-radius: 6px !important;
+        border: 0 !important;
+    }
+</style>
+
+@vite('resources/js/app.js')
+
+@stack('links')
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106310707-1"></script>
 <script>
