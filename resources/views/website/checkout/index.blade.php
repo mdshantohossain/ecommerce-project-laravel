@@ -69,114 +69,39 @@
                         <div class="heading_s1">
                             <h4>Billing Details</h4>
                         </div>
-                        <form method="post">
+                        <form method="POST">
+                            @csrf
                             <div class="form-group mb-3">
-                                <input type="text" required class="form-control" name="fname" placeholder="First name *">
+                                <input type="text" required class="form-control" name="name" placeholder="First name *">
                             </div>
-                            <div class="form-group mb-3">
-                                <input type="text" required class="form-control" name="lname" placeholder="Last name *">
-                            </div>
-                            <div class="form-group mb-3">
-                                <input class="form-control" required type="text" name="cname" placeholder="Company Name">
-                            </div>
-                            <div class="form-group mb-3">
-                                <div class="custom_select">
-                                    <select class="form-control">
-                                        <option value="">Select an option...</option>
-                                        <option value="AX">Aland Islands</option>
-                                        <option value="YE">Yemen</option>
-                                        <option value="ZM">Zambia</option>
-                                        <option value="ZW">Zimbabwe</option>
-                                    </select>
-                                </div>
-                            </div>
+
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" name="billing_address" required="" placeholder="Address *">
                             </div>
-                            <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="billing_address2" required="" placeholder="Address line2">
-                            </div>
-                            <div class="form-group mb-3">
-                                <input class="form-control" required type="text" name="city" placeholder="City / Town *">
-                            </div>
-                            <div class="form-group mb-3">
-                                <input class="form-control" required type="text" name="state" placeholder="State / County *">
-                            </div>
-                            <div class="form-group mb-3">
-                                <input class="form-control" required type="text" name="zipcode" placeholder="Postcode / ZIP *">
-                            </div>
+
                             <div class="form-group mb-3">
                                 <input class="form-control" required type="text" name="phone" placeholder="Phone *">
                             </div>
                             <div class="form-group mb-3">
                                 <input class="form-control" required type="text" name="email" placeholder="Email address *">
                             </div>
-                            <div class="form-group mb-3">
-                                <div class="chek-form">
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox" id="createaccount">
-                                        <label class="form-check-label label_info" for="createaccount"><span>Create an account?</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group create-account mb-3">
-                                <input class="form-control" required type="password" placeholder="Password" name="password" >
-                            </div>
-                            <div class="ship_detail">
-                                <div class="form-group mb-3">
-                                    <div class="chek-form">
-                                        <div class="custome-checkbox">
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="differentaddress">
-                                            <label class="form-check-label label_info" for="differentaddress"><span>Ship to a different address?</span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="different_address">
-                                    <div class="form-group mb-3">
-                                        <input type="text" required class="form-control" name="fname" placeholder="First name *">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input type="text" required class="form-control" name="lname" placeholder="Last name *">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control" required type="text" name="cname" placeholder="Company Name">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <div class="custom_select">
-                                            <select class="form-control">
-                                                <option value="">Select an option...</option>
-                                                <option value="AX">Aland Islands</option>
 
-
-                                                <option value="YE">Yemen</option>
-                                                <option value="ZM">Zambia</option>
-                                                <option value="ZW">Zimbabwe</option>
-                                            </select>
-                                        </div>
+                            <div class="payment_method">
+                                <div class="heading_s1">
+                                    <h4>Payment</h4>
+                                </div>
+                                <div class="payment_option">
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" type="radio" checked  name="payment_method" id="exampleRadios4" value="0">
+                                        <label class="form-check-label" for="exampleRadios4">Cash On Delivery</label>
                                     </div>
-                                    <div class="form-group mb-3">
-                                        <input type="text" class="form-control" name="billing_address" required="" placeholder="Address *">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input type="text" class="form-control" name="billing_address2" required="" placeholder="Address line2">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control" required type="text" name="city" placeholder="City / Town *">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control" required type="text" name="state" placeholder="State / County *">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control" required type="text" name="zipcode" placeholder="Postcode / ZIP *">
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="exampleRadios5" value="0">
+                                        <label class="form-check-label" for="exampleRadios5">Online Payment</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="heading_s1">
-                                <h4>Additional information</h4>
-                            </div>
-                            <div class="form-group mb-0">
-                                <textarea rows="5" class="form-control" placeholder="Order notes"></textarea>
-                            </div>
+                            <button type="submit" class="btn btn-fill-out btn-block">Place Order</button>
                         </form>
                     </div>
                     <div class="col-md-6">
@@ -222,29 +147,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            <div class="payment_method">
-                                <div class="heading_s1">
-                                    <h4>Payment</h4>
-                                </div>
-                                <div class="payment_option">
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" value="option3" checked="">
-                                        <label class="form-check-label" for="exampleRadios3">Direct Bank Transfer</label>
-                                        <p data-method="option3" class="payment-text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration. </p>
-                                    </div>
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios4" value="option4">
-                                        <label class="form-check-label" for="exampleRadios4">Check Payment</label>
-                                        <p data-method="option4" class="payment-text">Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                    </div>
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" type="radio" name="payment_option" id="exampleRadios5" value="option5">
-                                        <label class="form-check-label" for="exampleRadios5">Paypal</label>
-                                        <p data-method="option5" class="payment-text">Pay via PayPal; you can pay with your credit card if you don't have a PayPal account.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-fill-out btn-block">Place Order</a>
+
                         </div>
                     </div>
                 </div>

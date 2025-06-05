@@ -16,12 +16,19 @@
                                 <div class="heading_s1">
                                     <h3>Login</h3>
                                 </div>
-                                <form method="post">
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
                                     <div class="form-group mb-3">
-                                        <input type="text" required="" class="form-control" name="email" placeholder="Your Email">
+                                        <input type="text"  class="form-control" name="email" placeholder="Your Email">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group mb-3">
-                                        <input class="form-control" required="" type="password" name="password" placeholder="Password">
+                                        <input class="form-control" type="password" name="password" placeholder="Password">
+                                        @error('password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="login_footer form-group mb-3">
                                         <div class="chek-form">
@@ -43,7 +50,7 @@
                                     <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
                                     <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
                                 </ul>
-                                <div class="form-note text-center">Don't Have an Account? <a href="signup.html">Sign up now</a></div>
+                                <div class="form-note text-center">Don't Have an Account? <a href="{{ route('register') }}">Sign up now</a></div>
                             </div>
                         </div>
                     </div>

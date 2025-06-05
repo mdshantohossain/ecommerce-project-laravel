@@ -6,204 +6,82 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">All Categories</h4>
+                    <a href="{{ route('categories.create') }}" class="btn btn-primary btn-sm  waves-effect waves-light">
+                        Add Category
+                    </a>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Latest Transaction</h4>
                     <div class="table-responsive">
                         <table class="table align-middle table-nowrap mb-0">
                             <thead class="table-light">
                             <tr>
-                                <th style="width: 20px;">
-                                    <div class="form-check font-size-16 align-middle">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck01">
-                                        <label class="form-check-label" for="transactionCheck01"></label>
-                                    </div>
-                                </th>
-                                <th class="align-middle">Order ID</th>
-                                <th class="align-middle">Billing Name</th>
-                                <th class="align-middle">Date</th>
-                                <th class="align-middle">Total</th>
-                                <th class="align-middle">Payment Status</th>
-                                <th class="align-middle">Payment Method</th>
-                                <th class="align-middle">View Details</th>
+                                <th class="align-middle">Sl.</th>
+                                <th class="align-middle">Name</th>
+                                <th class="align-middle">Total Sub category</th>
+                                <th class="align-middle">Status</th>
+                                <th class="align-middle">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                        <label class="form-check-label" for="transactionCheck02"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td>
-                                <td>Neal Matthews</td>
-                                <td>
-                                    07 Oct, 2019
-                                </td>
-                                <td>
-                                    $400
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
 
-                            <tr>
+                            @if(count($categories) !== 0)
+                                @foreach($categories as $category)
+                                     <tr>
                                 <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck03">
-                                        <label class="form-check-label" for="transactionCheck03"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2541</a> </td>
-                                <td>Jamal Burnett</td>
-                                <td>
-                                    07 Oct, 2019
+                                    {{ $loop->iteration }}
                                 </td>
                                 <td>
-                                    $380
+                                    {{ $category->name }}
                                 </td>
                                 <td>
-                                    <span class="badge badge-pill badge-soft-danger font-size-11">Chargeback</span>
+                                    {{ count($category->subCategories) }}
                                 </td>
                                 <td>
-                                    <i class="fab fa-cc-visa me-1"></i> Visa
+                                    <span class="badge badge-pill {{ $category->status === 1 ? 'badge-soft-success' : 'badge-soft-secondary' }}  font-size-11">{{ $category->status === 1 ? 'Published': 'Unpublished' }}</span>
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
+                                    <div>
+                                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-primary" >
+                                            <i class="fa fa-edit"></i>
+                                        </a>
 
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck04">
-                                        <label class="form-check-label" for="transactionCheck04"></label>
+                                        <a href="#" class="btn btn-sm btn-danger" onclick='confirmDelete(event, "deleteForm-{{ $category->id }}")'>
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST" id="deleteForm-{{ $category->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </div>
                                 </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2542</a> </td>
-                                <td>Juan Mitchell</td>
-                                <td>
-                                    06 Oct, 2019
-                                </td>
-                                <td>
-                                    $384
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-paypal me-1"></i> Paypal
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
                             </tr>
+                                @endforeach
+                            @else
                             <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck05">
-                                        <label class="form-check-label" for="transactionCheck05"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2543</a> </td>
-                                <td>Barry Dick</td>
-                                <td>
-                                    05 Oct, 2019
-                                </td>
-                                <td>
-                                    $412
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
+                                <td colspan="9">
+                                    <p class="text-center fs-5 mt-4">No category created yet</p>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck06">
-                                        <label class="form-check-label" for="transactionCheck06"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2544</a> </td>
-                                <td>Ronald Taylor</td>
-                                <td>
-                                    04 Oct, 2019
-                                </td>
-                                <td>
-                                    $404
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-warning font-size-11">Refund</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-visa me-1"></i> Visa
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check font-size-16">
-                                        <input class="form-check-input" type="checkbox" id="transactionCheck07">
-                                        <label class="form-check-label" for="transactionCheck07"></label>
-                                    </div>
-                                </td>
-                                <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2545</a> </td>
-                                <td>Jacob Hunter</td>
-                                <td>
-                                    04 Oct, 2019
-                                </td>
-                                <td>
-                                    $392
-                                </td>
-                                <td>
-                                    <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                </td>
-                                <td>
-                                    <i class="fab fa-cc-paypal me-1"></i> Paypal
-                                </td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                        View Details
-                                    </button>
-                                </td>
-                            </tr>
+                            @endif
+
                             </tbody>
                         </table>
                     </div>
-                    <!-- end table-responsive -->
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function confirmDelete(event, formId) {
+            if (confirm('Are you sure to delete this one?')) {
+                event.preventDefault();
+                document.getElementById(formId).submit();
+            }
+        }
+    </script>
+@endpush

@@ -14,9 +14,7 @@
                         <i class="bx bx-home-circle"></i>
                         <span key="t-dashboards">Dashboards</span>
                     </a>
-
                 </li>
-
 
             {{--product module--}}
                 <li>
@@ -25,18 +23,13 @@
                         <span key="t-tables">Products Module</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="tables-basic.html" key="t-basic-tables">Category Manage</a></li>
-                        <li><a href="tables-datatable.html" key="t-data-tables">Sub Category Manage</a></li>
-                        <li><a href="tables-responsive.html" key="t-responsive-table">Product Manage</a></li>
+                        <li><a href="{{ url('/categories') }}" key="t-basic-tables">Category Manage</a></li>
+                        <li><a href="{{ url('/sub-categories') }}" key="t-data-tables">Sub Category Manage</a></li>
+                        <li><a href="{{ url('/products') }}" key="t-responsive-table">Product Manage</a></li>
                     </ul>
                 </li>
 
-
-
-
-
-
-
+            {{--order module--}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-task"></i>
@@ -48,6 +41,7 @@
                         <li><a href="tasks-create.html" key="t-create-task">Create Task</a></li>
                     </ul>
                 </li>
+
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -80,7 +74,6 @@
                         <i class="bx bx-user-circle"></i>
                         <span key="t-authentication">User Module</span>
                     </a>
-
                 </li>
 
 
@@ -92,7 +85,6 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="ui-alerts.html" key="t-alerts">Role Manage</a></li>
                         <li><a href="ui-buttons.html" key="t-buttons">Permission Manage</a></li>
-                        <li><a href="ui-cards.html" key="t-cards">Assign Role</a></li>
                     </ul>
                 </li>
 

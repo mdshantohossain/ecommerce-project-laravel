@@ -27,3 +27,24 @@
 <script src="{{asset('/')}}website/assets/js/jquery.elevatezoom.js"></script>
 <!-- scripts js -->
 <script src="{{asset('/')}}website/assets/js/scripts.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": false,
+        "positionClass": "toast-bottom-left",
+        "timeOut": "3000",
+    };
+    @if(session('success'))
+    toastr.success(session('success'));
+    @endif
+
+    @if(session('error'))
+    toastr.error(@json(session('error')));
+    @endif
+</script>
+
+
+@stack('scripts')
