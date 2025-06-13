@@ -10,97 +10,103 @@
         <div class="section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="toggle_info">
-                            <span><i class="fas fa-user"></i>Returning customer? <a href="#loginform" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to login</a></span>
-                        </div>
-                        <div class="panel-collapse collapse login_form" id="loginform">
-                            <div class="panel-body">
-                                <p>If you have shopped with us before, please enter your details below. If you are a new customer, please proceed to the Billing &amp; Shipping section.</p>
-                                <form method="post">
-                                    <div class="form-group mb-3">
-                                        <input type="text" required="" class="form-control" name="email" placeholder="Username Or Email">
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <input class="form-control" required="" type="password" name="password" placeholder="Password">
-                                    </div>
-                                    <div class="login_footer form-group mb-3">
-                                        <div class="chek-form">
-                                            <div class="custome-checkbox">
-                                                <input class="form-check-input" type="checkbox" name="checkbox" id="remember" value="">
-                                                <label class="form-check-label" for="remember"><span>Remember me</span></label>
-                                            </div>
-                                        </div>
-                                        <a href="#">Forgot password?</a>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <button type="submit" class="btn btn-fill-out btn-block" name="login">Log in</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="toggle_info">
-                            <span><i class="fas fa-tag"></i>Have a coupon? <a href="#coupon" data-bs-toggle="collapse" class="collapsed" aria-expanded="false">Click here to enter your code</a></span>
-                        </div>
-                        <div class="panel-collapse collapse coupon_form" id="coupon">
-                            <div class="panel-body">
-                                <p>If you have a coupon code, please apply it below.</p>
-                                <div class="coupon field_form input-group">
-                                    <input type="text" value="" class="form-control" placeholder="Enter Coupon Code..">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-fill-out btn-sm" type="submit">Apply Coupon</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="medium_divider"></div>
-                        <div class="divider center_icon"><i class="linearicons-credit-card"></i></div>
-                        <div class="medium_divider"></div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-md-6">
                         <div class="heading_s1">
                             <h4>Billing Details</h4>
                         </div>
-                        <form method="POST">
+                        <form method="POST" action="{{ route('order.place') }}">
                             @csrf
                             <div class="form-group mb-3">
-                                <input type="text" required class="form-control" name="name" placeholder="First name *">
+                                <input type="text"  class="form-control" name="name" placeholder="Full name *">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <input class="form-control"  type="text" name="phone" placeholder="Phone *">
+                                 @error('phone')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <input class="form-control" type="text" name="email" placeholder="Email address *">
+                                 @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="billing_address" required="" placeholder="Address *">
+                                <textarea name="delivery_address" rows="5" class="form-control" placeholder="Delivery Address *"></textarea>
+                                 @error('delivery_address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <div class="form-group mb-3">
-                                <input class="form-control" required type="text" name="phone" placeholder="Phone *">
-                            </div>
-                            <div class="form-group mb-3">
-                                <input class="form-control" required type="text" name="email" placeholder="Email address *">
-                            </div>
 
-                            <div class="payment_method">
-                                <div class="heading_s1">
-                                    <h4>Payment</h4>
-                                </div>
-                                <div class="payment_option">
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" type="radio" checked  name="payment_method" id="exampleRadios4" value="0">
-                                        <label class="form-check-label" for="exampleRadios4">Cash On Delivery</label>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="payment_method">
+                                        <div class="heading_s1">
+                                            <h4>Payment Method</h4>
+                                        </div>
+                                        <div class="payment_option">
+                                            <div class="custome-radio">
+                                                <input class="form-check-input" type="radio" checked  name="payment_method" id="exampleRadios4" value="0">
+                                                <label class="form-check-label" for="exampleRadios4">Cash On Delivery</label><br>
+                                            </div>
+                                            <div class="custome-radio">
+                                                <input class="form-check-input" type="radio" name="payment_method" id="exampleRadios5" value="1">
+                                                <label class="form-check-label" for="exampleRadios5">Online Payment</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="exampleRadios5" value="0">
-                                        <label class="form-check-label" for="exampleRadios5">Online Payment</label>
+                                </div>
+                            </div>
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="payment_method">
+                                        <div class="heading_s1">
+                                            <h4>Delivery Method</h4>
+                                        </div>
+                                        <div class="d-flex flex-row mb-3">
+                                            <div class="custome-radio me-5">
+                                                <input class="form-check-input" type="radio" checked data-bs-toggle="collapse" data-bs-target="#collapseDhaka"  name="delivery_method" id="exampleRadios7" value="1">
+                                                <label class="form-check-label" for="exampleRadios7">Dhaka</label>
+                                            </div>
+
+                                            <div class="custome-radio">
+                                                <input class="form-check-input" type="radio" data-bs-toggle="collapse" data-bs-target="#collapseOutDhaka" name="delivery_method" id="exampleRadios8" value="0">
+                                                <label class="form-check-label" for="exampleRadios8">Out Of Dhaka</label>
+                                            </div>
+                                        </div>
+                                        <!-- Collapsible Content -->
+                                        <div class="mt-3">
+                                            <!-- Dhaka Content -->
+                                            <div class="collapse show" id="collapseDhaka" data-bs-parent=".mt-3">
+                                               <small class="text-muted">* Delivery charge Tk.{{ $deliveryCharge }} is required.</small><br>
+                                               <small class="text-muted">* Dhaka delivery selected. Estimated 1–2 days.</small>
+                                            </div>
+
+                                            <!-- Out of Dhaka Content -->
+                                            <div class="collapse" id="collapseOutDhaka" data-bs-parent=".mt-3">
+                                                <small class="text-muted">* Delivery charge Tk.110 is required.</small><br>
+                                                <small class="text-muted">* Dhaka delivery selected. Estimated 3–5 days.</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
+{{--                            cupon section--}}
+{{--                            <div class="coupon field_form input-group mb-3">--}}
+{{--                                <input type="text" value="" class="form-control" placeholder="Enter Coupon Code..">--}}
+{{--                                <div class="input-group-append">--}}
+{{--                                    <button class="btn btn-fill-out btn-sm" type="submit">Apply Coupon</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
                             <button type="submit" class="btn btn-fill-out btn-block">Place Order</button>
                         </form>
                     </div>
@@ -118,31 +124,34 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
+                                    @forelse(Cart::content() as $cartProduct)
                                     <tr>
-                                        <td>Blue Dress For Woman <span class="product-qty">x 2</span></td>
-                                        <td>$90.00</td>
+                                        <td>{{ substr($cartProduct->name, 0, 22) }} <span class="product-qty">x {{ $cartProduct->qty }}</span></td>
+                                        <td>Tk.{{ $cartProduct->price * $cartProduct->qty }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Lether Gray Tuxedo <span class="product-qty">x 1</span></td>
-                                        <td>$55.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>woman full sliv dress <span class="product-qty">x 3</span></td>
-                                        <td>$204.00</td>
-                                    </tr>
+                                    @empty
+                                        <h3>Product doesn't exists on cart  </h3>
+                                    @endforelse
+
                                     </tbody>
                                     <tfoot>
+                                    @php
+                                        $subtotal = (float) str_replace(',', '', Cart::subTotal());
+                                        $shipping_cost = 60;
+                                        $total = $subtotal + $shipping_cost;
+                                    @endphp
                                     <tr>
                                         <th>SubTotal</th>
-                                        <td class="product-subtotal">$349.00</td>
+                                        <td class="product-subtotal">Tk.{{ $subtotal }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Shipping</th>
-                                        <td>Free Shipping</td>
+                                        <th>Delivery charge</th>
+                                        <td>Tk.{{ $shipping_cost }}</td>
                                     </tr>
                                     <tr>
                                         <th>Total</th>
-                                        <td class="product-subtotal">$349.00</td>
+                                        <td class="product-subtotal">Tk.{{ $total }}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -154,28 +163,6 @@
             </div>
         </div>
         <!-- END SECTION SHOP -->
-
-        <!-- START SECTION SUBSCRIBE NEWSLETTER -->
-        <div class="section bg_default small_pt small_pb">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="heading_s1 mb-md-0 heading_light">
-                            <h3>Subscribe Our Newsletter</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="newsletter_form">
-                            <form>
-                                <input type="text" required="" class="form-control rounded-0" placeholder="Enter Email Address">
-                                <button type="submit" class="btn btn-dark rounded-0" name="submit" value="Submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- START SECTION SUBSCRIBE NEWSLETTER -->
 
     </div>
     <!-- END MAIN CONTENT -->

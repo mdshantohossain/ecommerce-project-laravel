@@ -136,55 +136,31 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="tab-style1">
-                            <ul class="nav nav-tabs justify-content-center" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="arrival-tab" data-bs-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="true">New Arrival</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="sellers-tab" data-bs-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Best Sellers</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="featured-tab" data-bs-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Featured</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="special-tab" data-bs-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="false">Special Offer
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+
                         <div class="tab_slider tab-content">
                             <div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
                                 <div id="product_box" class="product_slider carousel_slider owl-carousel owl-theme dot_style1" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}'>
                                     @foreach($products as $product)
                                         <div class="item">
                                             <div class="product_wrap">
-                                                <div class="product_img">
+                                                <div class="">
                                                     <a href="{{ route('product.detail', $product->id) }}">
                                                         <img src="{{ $product->main_image }}" height="220" class="rounded-2" alt="el_img1">
-                                                        @if(isset($product?->otherImages[1]))
-                                                            <img class="product_hover_img" src="{{ $product?->otherImages[1]->image }}" alt="el_hover_img1">
-                                                        @endif
+{{--                                                        @if(isset($product?->otherImages[1]))--}}
+{{--                                                            <img class="product_hover_img" src="{{ $product?->otherImages[1]->image }}" alt="el_hover_img1">--}}
+{{--                                                        @endif--}}
                                                     </a>
-                                                    <div class="product_action_box">
-                                                        <ul class="list_none pr_action_btn">
-                                                            <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                            <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                            <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                            <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                        </ul>
-                                                    </div>
                                                 </div>
                                                 <div class="product_info">
-                                                    <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a></h6>
+                                                    <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ substr($product->name, 0, 22) }}</a></h6>
                                                     <div class="product_price">
                                                         <span class="price">Tk.{{ $product->selling_price }}</span>
                                                         <del>Tk.{{ $product->regular_price }}</del>
-                                                        @if($product->discount)
-                                                            <div class="on_sale">
-                                                                <span>{{ $product->discount }} Off</span>
-                                                            </div>
-                                                        @endif
+{{--                                                        @if($product->discount)--}}
+{{--                                                            <div class="on_sale">--}}
+{{--                                                                <span>{{ $product->discount }} Off</span>--}}
+{{--                                                            </div>--}}
+{{--                                                        @endif--}}
                                                     </div>
                                                     <div class="rating_wrap">
                                                         <div class="rating">
@@ -192,8 +168,19 @@
                                                         </div>
                                                         <span class="rating_num">(21)</span>
                                                     </div>
-                                                    <div class="pr_desc">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                                    <div class="row flex-column mt-2">
+                                                        <button
+                                                            @if(isProductInCart($product->id))
+                                                                disabled
+                                                            @endif
+                                                            type="button"
+                                                            class="d-block btn btn-sm btn-pink mb-1 text-white"
+                                                            style="background: #FF324D"
+                                                            onclick="addToCart({{ $product->id }})"
+                                                            id="cartAddBtn{{$product->id}}"
+                                                        >{{ isProductInCart($product->id) ? 'Added in cart' : 'Add to cart' }}</button>
+
+                                                        <a href="{{ route('direct.checkout', $product->id) }}" class=" btn btn-sm btn-dark ms-0">Order Now</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -922,32 +909,25 @@
                             @foreach($trendingProducts as $product)
                                 <div class="item">
                                     <div class="product_wrap">
-                                        <div class="product_img">
+                                        <div class="">
                                             <a href="{{ route('product.detail', $product->id) }}">
                                                 <img src="{{ $product->main_image }}" height="220" class="rounded-2" alt="el_img1">
-                                                @if(isset($product?->otherImages[1]))
-                                                    <img class="product_hover_img" src="{{ $product?->otherImages[1]->image }}" alt="el_hover_img1">
-                                                @endif
+{{--                                                @if(isset($product?->otherImages[1]))--}}
+{{--                                                    <img class="product_hover_img" src="{{ $product?->otherImages[1]->image }}" alt="el_hover_img1">--}}
+{{--                                                @endif--}}
                                             </a>
-                                            <div class="product_action_box">
-                                                <ul class="list_none pr_action_btn">
-                                                    <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                                    <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                    <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                                    <li><a href="#"><i class="icon-heart"></i></a></li>
-                                                </ul>
-                                            </div>
+
                                         </div>
                                         <div class="product_info">
                                             <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a></h6>
                                             <div class="product_price">
                                                 <span class="price">Tk.{{ $product->selling_price }}</span>
                                                 <del>Tk.{{ $product->regular_price }}</del>
-                                                @if($product->discount)
-                                                    <div class="on_sale">
-                                                        <span>{{ $product->discount }} Off</span>
-                                                    </div>
-                                                @endif
+{{--                                                @if($product->discount)--}}
+{{--                                                    <div class="on_sale bg-danger p-2 absolute top-2 left-5">--}}
+{{--                                                        <span>{{ $product->discount }} Off</span>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
                                             </div>
                                             <div class="rating_wrap">
                                                 <div class="rating">
@@ -955,8 +935,19 @@
                                                 </div>
                                                 <span class="rating_num">(21)</span>
                                             </div>
-                                            <div class="pr_desc">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus blandit massa enim. Nullam id varius nunc id varius nunc.</p>
+                                            <div class="row flex-column mt-2">
+                                                <button
+                                                    @if(isProductInCart($product->id))
+                                                        disabled
+                                                    @endif
+                                                    type="button"
+                                                    class="d-block btn btn-sm btn-pink mb-1 text-white"
+                                                    style="background: #FF324D"
+                                                    onclick="addToCart({{ $product->id }})"
+                                                    id="cartAddBtn{{$product->id}}"
+                                                >{{ isProductInCart($product->id) ? 'Added in cart' : 'Add to cart' }}</button>
+
+                                                <a href="{{ route('direct.checkout', $product->id) }}" class=" btn btn-sm btn-dark ms-0">Order Now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1045,8 +1036,6 @@
         </div>
         <!-- END SECTION TESTIMONIAL -->
 
-
-
         <!-- START SECTION CLIENT LOGO -->
         <div class="section small_pt">
             <div class="container">
@@ -1123,59 +1112,32 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            window.Echo
-                .channel('product')
-                .listen('.product.create', function({ product }) {
-                    console.log(product)
-                    let cardBody = document.querySelector('#product-box');
+        function addToCart( productId) {
 
-                    let item = `
-                <div class="item">
-                    <div class="product_wrap">
-                        <div class="product_img">
-                            <a href="/product-detail/${product.id}">
-                                <img src="${product.main_image}" height="220" class="rounded-2" alt="el_img1">
-                                <img class="product_hover_img" src="${product.otherImages?.[1]?.image || 'https://via.placeholder.com/150'}" alt="el_hover_img1">
-                            </a>
-                            <div class="product_action_box">
-                                <ul class="list_none pr_action_btn">
-                                    <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                                    <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                    <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
-                                    <li><a href="#"><i class="icon-heart"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product_info">
-                            <h6 class="product_title">
-                                <a href="/product-detail/${product.id}">${product.name}</a>
-                            </h6>
-                            <div class="product_price">
-                                <span class="price">Tk.${product.selling_price}</span>
-                                <del>Tk.${product.regular_price}</del>
-                                ${product.discount ? `
-                                    <div class="on_sale">
-                                        <span>${product.discount} Off</span>
-                                    </div>` : ''}
-                            </div>
-                            <div class="rating_wrap">
-                                <div class="rating">
-                                    <div class="product_rate" style="width:80%"></div>
-                                </div>
-                                <span class="rating_num">(21)</span>
-                            </div>
-                            <div class="pr_desc">
-                                <p>${product.description || 'No description available.'}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+            $.ajax({
+                method: 'POST',
+               url: '/cart-add-via-ajax',
+                data: {
+                    product_id: productId,
+                    qty: 1,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: (data) => {
+                    if(data.success) {
+                        const btn = document.querySelector('#cartAddBtn'+ productId);
+                        btn.setAttribute('disabled', true);
+                        btn.innerText = "Added To Cart";
+                        toastr.success(data.success)
+                    }
+                    if(data.warning) {
+                        toastr.warning(data.warning)
+                    }
+                },
+                error: (error) => {
+                    console.error(error)
+                }
+            });
 
-                    let $itemElement = $($.parseHTML(item));
-                    $('#product_box').trigger('add.owl.carousel', [$itemElement]).trigger('refresh.owl.carousel');
-                });
-        });
+        }
     </script>
 @endpush

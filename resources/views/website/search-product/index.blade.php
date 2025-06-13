@@ -1,6 +1,6 @@
 @extends('website.layouts.master')
 
-@section('title', 'Category Products')
+@section('title', $query)
 
 @section('body')
     <!-- START MAIN CONTENT -->
@@ -32,69 +32,69 @@
                         <div class="row shop_container">
                             @forelse($products as $product)
                                 <div class="col-md-4 col-6 ">
-                                <div class="product">
-                                    <div class="">
-                                        <a href="{{ route('product.detail', $product->id) }}">
-                                            <img src="{{ $product->main_image }}" height="220" class="rounded-2" width="100%" alt="product_img1" />
-                                        </a>
-{{--                                        <div class="product_action_box">--}}
-{{--                                            <ul class="list_none pr_action_btn">--}}
-{{--                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>--}}
-{{--                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>--}}
-{{--                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>--}}
-{{--                                                <li><a href="#"><i class="icon-heart"></i></a></li>--}}
-{{--                                            </ul>--}}
-{{--                                        </div>--}}
-                                    </div>
-                                    <div class="product_info">
-                                        <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">Tk.{{ $product->selling_price }}</span>
-                                            <del>Tk.{{ $product->regular_price }}</del>
-                                            @if($product->discount)
-                                            <div class="on_sale">
-                                                <span>{{ $product->discount }} Off</span>
-                                            </div>
-                                            @endif
+                                    <div class="product">
+                                        <div class="">
+                                            <a href="{{ route('product.detail', $product->id) }}">
+                                                <img src="{{ $product->main_image }}" height="220" class="rounded-2" width="100%" alt="product_img1" />
+                                            </a>
+                                            {{--                                        <div class="product_action_box">--}}
+                                            {{--                                            <ul class="list_none pr_action_btn">--}}
+                                            {{--                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>--}}
+                                            {{--                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>--}}
+                                            {{--                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>--}}
+                                            {{--                                                <li><a href="#"><i class="icon-heart"></i></a></li>--}}
+                                            {{--                                            </ul>--}}
+                                            {{--                                        </div>--}}
                                         </div>
-                                        <div class="rating_wrap">
-                                            <div class="rating">
-                                                <div class="product_rate" style="width:80%"></div>
-                                            </div>
-                                            <span class="rating_num">(21)</span>
-                                        </div>
-                                        <div class="row flex-column mt-2">
-                                            <button
-                                                @if(isProductInCart($product->id))
-                                                    disabled
+                                        <div class="product_info">
+                                            <h6 class="product_title"><a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a></h6>
+                                            <div class="product_price">
+                                                <span class="price">Tk.{{ $product->selling_price }}</span>
+                                                <del>Tk.{{ $product->regular_price }}</del>
+                                                @if($product->discount)
+                                                    <div class="on_sale">
+                                                        <span>{{ $product->discount }} Off</span>
+                                                    </div>
                                                 @endif
-                                                type="button"
-                                                class="d-block btn btn-sm btn-pink mb-1 text-white"
-                                                style="background: #FF324D"
-                                                onclick="addToCart({{ $product->id }})"
-                                                id="cartAddBtn{{$product->id}}"
-                                            >{{ isProductInCart($product->id) ? 'Added in cart' : 'Add to cart' }}</button>
+                                            </div>
+                                            <div class="rating_wrap">
+                                                <div class="rating">
+                                                    <div class="product_rate" style="width:80%"></div>
+                                                </div>
+                                                <span class="rating_num">(21)</span>
+                                            </div>
+                                            <div class="row flex-column mt-2">
+                                                <button
+                                                    @if(isProductInCart($product->id))
+                                                        disabled
+                                                    @endif
+                                                    type="button"
+                                                    class="d-block btn btn-sm btn-pink mb-1 text-white"
+                                                    style="background: #FF324D"
+                                                    onclick="addToCart({{ $product->id }})"
+                                                    id="cartAddBtn{{$product->id}}"
+                                                >{{ isProductInCart($product->id) ? 'Added in cart' : 'Add to cart' }}</button>
 
-                                            <a href="{{ route('direct.checkout', $product->id) }}" class=" btn btn-sm btn-dark ms-0">Order Now</a>
+                                                <a href="{{ route('direct.checkout', $product->id) }}" class=" btn btn-sm btn-dark ms-0">Order Now</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @empty
                                 <h1 class="text-center text-secondary fs-4">Doesn't have any product</h1>
                             @endforelse
                         </div>
                         @if(count($products) !== 0)
                             <div class="row">
-                            <div class="col-12">
-                                <ul class="pagination mt-3 justify-content-center pagination_style1">
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#"><i class="linearicons-arrow-right"></i></a></li>
-                                </ul>
+                                <div class="col-12">
+                                    <ul class="pagination mt-3 justify-content-center pagination_style1">
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#"><i class="linearicons-arrow-right"></i></a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                     <div class="col-lg-3 order-lg-first mt-4 pt-2 mt-lg-0 pt-lg-0">
@@ -143,32 +143,34 @@
                                     </li>
                                 </ul>
                             </div>
-{{--                            <div class="widget">--}}
-{{--                                <div class="shop_banner">--}}
-{{--                                    <div class="banner_img overlay_bg_20">--}}
-{{--                                        <img src="assets/images/sidebar_banner_img.jpg" alt="sidebar_banner_img">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="shop_bn_content2 text_white">--}}
-{{--                                        <h5 class="text-uppercase shop_subtitle">New Collection</h5>--}}
-{{--                                        <h3 class="text-uppercase shop_title">Sale 30% Off</h3>--}}
-{{--                                        <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">Shop Now</a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="widget">--}}
+                            {{--                                <div class="shop_banner">--}}
+                            {{--                                    <div class="banner_img overlay_bg_20">--}}
+                            {{--                                        <img src="assets/images/sidebar_banner_img.jpg" alt="sidebar_banner_img">--}}
+                            {{--                                    </div>--}}
+                            {{--                                    <div class="shop_bn_content2 text_white">--}}
+                            {{--                                        <h5 class="text-uppercase shop_subtitle">New Collection</h5>--}}
+                            {{--                                        <h3 class="text-uppercase shop_title">Sale 30% Off</h3>--}}
+                            {{--                                        <a href="#" class="btn btn-white rounded-0 btn-sm text-uppercase">Shop Now</a>--}}
+                            {{--                                    </div>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- END SECTION SHOP -->
+
     </div>
     <!-- END MAIN CONTENT -->
 @endsection
 
-
-
 @push('scripts')
     <script>
+
+        document.querySelector('#search').value = "{{ $query }}";
+
         function addToCart( productId) {
 
             $.ajax({
@@ -194,6 +196,7 @@
                     console.error(error)
                 }
             });
+
         }
     </script>
 @endpush

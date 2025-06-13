@@ -114,5 +114,6 @@ class DatabaseSeeder extends Seeder
            }
         }
 
+        User::factory(1)->create();
     }
 }

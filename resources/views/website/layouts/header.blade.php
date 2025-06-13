@@ -9,47 +9,53 @@
                     <img class="logo_light" src="{{asset('/')}}website/assets/images/logo_light.png" alt="logo">
                     <img class="logo_dark" src="{{asset('/')}}website/assets/images/logo_dark.png" alt="logo">
                 </a>
+
                 <div class="product_search_form radius_input search_form_btn">
-                    <form>
+                    <form method="GET" action="{{ route('search.products') }}">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="custom_select">
-                                    <select class="first_null not_chosen">
+                                    <select class="first_null not_chosen" name="category_id">
                                         <option value="">All Category</option>
-
                                         @forelse($globalCategories as  $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ isset($categoryId) && $categoryId == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                         @empty
                                             <option value="">Doesn't have any category</option>
                                         @endforelse
                                     </select>
                                 </div>
                             </div>
-                            <input class="form-control" placeholder="Search Product..." name="query" type="text" />
+                            <input class="form-control" placeholder="Search Product..." id="search" name="name" type="text" />
                             <button type="submit" class="search_btn3">Search</button>
                         </div>
                     </form>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
-                    <li><a href="{{ route(auth()->check() ? 'user.profile': 'login') }}" class="nav-link"><i class="linearicons-user"></i></a></li>
-                    <li><a href="#" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
-                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown"><i class="linearicons-bag2"></i><span class="cart_count">2</span><span class="amount"><span class="currency_symbol">$</span>159.00</span></a>
+                    <li><a href="{{  route('user.profile')}}" class="nav-link"><i class="linearicons-user"></i></a></li>
+                    <li><a href="{{ route('wishlist') }}" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
+                    <li class="dropdown cart_dropdown">
+                        <a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown">
+                            <i class="linearicons-bag2"></i>
+                            <span class="cart_count">{{ count(Cart::content()) }}</span>
+                            <span class="amount">
+                                <span class="currency_symbol">Tk.</span>{{ Cart::subTotal() }}
+                            </span>
+                        </a>
                         <div class="cart_box cart_right dropdown-menu dropdown-menu-right">
                             <ul class="cart_list">
-                                <li>
-                                    <a href="#" class="item_remove"><i class="ion-close"></i></a>
-                                    <a href="#"><img src="{{asset('/')}}website/assets/images/cart_thamb1.jpg" alt="cart_thumb1">Variable product 001</a>
-                                    <span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>78.00</span>
+                                @forelse(Cart::content() as $cartProduct)
+                                    <li>
+                                    <a href="{{ route('cart.remove', $cartProduct->rowId) }}" class="item_remove"><i class="ion-close"></i></a>
+                                    <a href="#"><img src="{{ $cartProduct->options->image }}" class="rounded-2" width="80" height="60" alt="{{ substr($cartProduct->name, 0, 22) }}">{{ $cartProduct->name }}</a>
+                                    <span class="cart_quantity"> {{ $cartProduct->qty }} x <span class="cart_amount"> <span class="price_symbole">Tk.</span></span>{{ $cartProduct->price }}</span>
                                 </li>
-                                <li>
-                                    <a href="#" class="item_remove"><i class="ion-close"></i></a>
-                                    <a href="#"><img src="{{asset('/')}}website/assets/images/cart_thamb2.jpg" alt="cart_thumb2">Ornare sed consequat</a>
-                                    <span class="cart_quantity"> 1 x <span class="cart_amount"> <span class="price_symbole">$</span></span>81.00</span>
-                                </li>
+                                @empty
+                                    <li>Cart is empty</li>
+                                @endforelse
                             </ul>
                             <div class="cart_footer">
-                                <p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">$</span></span>159.00</p>
-                                <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">View Cart</a><a href="#" class="btn btn-fill-out checkout">Checkout</a></p>
+                                <p class="cart_total"><strong>Subtotal:</strong> <span class="cart_price"> <span class="price_symbole">Tk.</span></span>{{ Cart::subTotal() }}</p>
+                                <p class="cart_buttons"><a href="{{ route('cart.view') }}" class="btn btn-fill-line view-cart">View Cart</a><a href="{{ route('checkout') }}" class="btn btn-fill-out checkout">Checkout</a></p>
                             </div>
                         </div>
                     </li>

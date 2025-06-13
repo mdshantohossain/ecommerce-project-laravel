@@ -32,17 +32,20 @@
 
 <script>
     toastr.options = {
-        "closeButton": true,
+        // "closeButton": true,
         "progressBar": false,
         "positionClass": "toast-bottom-left",
         "timeOut": "3000",
     };
     @if(session('success'))
-    toastr.success(session('success'));
+    toastr.success(@json(session('success')));
     @endif
 
     @if(session('error'))
-    toastr.error(@json(session('error')));
+         toastr.error(@json(session('error')));
+    @endif
+    @if(session('warning'))
+    toastr.warning(@json(session('warning')));
     @endif
 </script>
 
