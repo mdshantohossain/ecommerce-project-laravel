@@ -28,6 +28,7 @@ return new class extends Migration
             $table->tinyInteger('featured')->default(0);
             $table->integer('quantity');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('is_drop_shop')->nullable()->comment('0: No,1: yes');
             $table->timestamps();
         });
     }

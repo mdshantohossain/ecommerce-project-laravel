@@ -9,7 +9,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="card-title">Category create form</h4>
                     <a href="{{ route('categories.index') }}" class="btn btn-secondary btn-sm  waves-effect waves-light">
-                       Back
+                        Back
                     </a>
                 </div>
                 <div class="card-body">
@@ -19,7 +19,7 @@
                             <label for="formrow-firstname-input" class="form-label">Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" value="{{ old('name') }}" name="name" placeholder="Enter category name" />
                             @error('name')
-                                <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 

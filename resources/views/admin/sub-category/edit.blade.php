@@ -9,7 +9,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="card-title">Sub category edit form</h4>
                     <a href="{{ route('sub-categories.index') }}" class="btn btn-secondary btn-sm  waves-effect waves-light">
-                       Back
+                        Back
                     </a>
                 </div>
                 <div class="card-body">
@@ -28,7 +28,7 @@
                                 @endforelse
                             </select>
                             @error('category_id')
-                                 <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -36,7 +36,7 @@
                             <label for="formrow-firstname-input" class="form-label">Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" value="{{ $subCategory->name }}" name="name" placeholder="Enter category name" />
                             @error('name')
-                                <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 

@@ -21,11 +21,11 @@
         "timeOut": "3000",
     };
     @if(session('success'))
-        toastr.success(@json(session('success')));
+    toastr.success(@json(session('success')));
     @endif
 
     @if(session('error'))
-        toastr.error(@json(session('error')));
+    toastr.error(@json(session('error')));
     @endif
 </script>
 @stack('scripts')

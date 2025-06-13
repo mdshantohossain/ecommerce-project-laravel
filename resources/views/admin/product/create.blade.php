@@ -9,7 +9,7 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="card-title">Product create form</h4>
                     <a href="{{ route('products.index') }}" class="btn btn-secondary btn-sm  waves-effect waves-light">
-                       Back
+                        Back
                     </a>
                 </div>
                 <div class="card-body">
@@ -30,7 +30,7 @@
                                 @endforelse
                             </select>
                             @error('category_id')
-                                 <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -56,7 +56,7 @@
                             <label for="formrow-firstname-input" class="form-label">Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" value="{{ old('name') }}" name="name" placeholder="Enter product name" />
                             @error('name')
-                                <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
@@ -166,20 +166,20 @@
                 const categoryId = e.target.value;
 
                 if(categoryId) {
-                     fetch(`/get-sub-categories/${categoryId}`)
-                         .then(res => res.json())
-                         .then(res => {
-                             subCategorySelect.innerHTML = '<option value="">Select product sub-category</option>';
+                    fetch(`/get-sub-categories/${categoryId}`)
+                        .then(res => res.json())
+                        .then(res => {
+                            subCategorySelect.innerHTML = '<option value="">Select product sub-category</option>';
 
-                             if(res.length > 0) {
-                                 res.forEach(subCategory => {
-                                     const option = document.createElement('option');
-                                     option.value = subCategory.id;
-                                     option.textContent = subCategory.name;
-                                     subCategorySelect.appendChild(option);
-                                 })
-                             }
-                         });
+                            if(res.length > 0) {
+                                res.forEach(subCategory => {
+                                    const option = document.createElement('option');
+                                    option.value = subCategory.id;
+                                    option.textContent = subCategory.name;
+                                    subCategorySelect.appendChild(option);
+                                })
+                            }
+                        });
                 }
             });
         });

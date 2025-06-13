@@ -16,7 +16,7 @@
                     </a>
                 </li>
 
-            {{--product module--}}
+                {{--product module--}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-list-ul"></i>
@@ -29,7 +29,7 @@
                     </ul>
                 </li>
 
-            {{--order module--}}
+                {{--order module--}}
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-task"></i>
@@ -75,7 +75,6 @@
                         <span key="t-authentication">User Module</span>
                     </a>
                 </li>
-
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -26,11 +26,12 @@
 <!-- Style CSS -->
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/style.css">
 <link rel="stylesheet" href="{{asset('/')}}website/assets/css/responsive.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
     /* Customize toastr success */
     .toast-success {
-        background-color: #556ee6 !important; /* Bootstrap green */
+        background-color: #FF324D !important; /* Bootstrap green */
         font-size: 15px;
     }
 

@@ -20,7 +20,7 @@
                             <label for="formrow-firstname-input" class="form-label">Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" value="{{ $category->name }}" name="name" placeholder="Enter category name" />
                             @error('name')
-                             <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
 
