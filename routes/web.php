@@ -30,7 +30,8 @@ Route::post('/cart-add-via-ajax', [CartController::class, 'addViaAjax']);
 // checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::get('/direct-checkout/{id}', [CheckoutController::class, 'directCheckout'])->name('direct.checkout');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
 Route::get('/product-detail/{id}', [EcommerceController::class, 'productDetail'])->name('product.detail');
 Route::get('/sub-category-product/{id}', [CategoryController::class, 'subCategoryProducts'])->name('sub-category.product');
 Route::get('/category-product/{id}', [CategoryController::class, 'categoryProducts'])->name('category.product');
@@ -55,6 +56,10 @@ Route::resource('/categories', CategoryController::class)->except(['show']);
 Route::resource('/sub-categories', SubCategoryController::class)->except(['show']);
 Route::get('/get-sub-categories/{categoryId}', [SubCategoryController::class,  'getSubCategories']);
 Route::resource('/products', ProductController::class);
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
