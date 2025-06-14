@@ -8,6 +8,6 @@ class AppCredentialController extends Controller
 {
     public function index()
     {
-        return view('admin.credential.index');
+        return view('admin.app-credential.index');
     }
 }

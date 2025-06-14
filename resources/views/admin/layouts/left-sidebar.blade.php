@@ -87,6 +87,17 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-add-to-queue"></i>
+                        <span key="t-ui-elements">Application Setting</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('app.credential') }}" key="t-alerts">Credential Manage</a></li>
+                        <li><a href="ui-buttons.html" key="t-buttons">Shipping Manage</a></li>
+                    </ul>
+                </li>
+
 
 
             </ul>
