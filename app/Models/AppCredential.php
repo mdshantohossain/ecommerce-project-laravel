@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppCredential extends Model
 {
-    //
+    protected $guarded = [];
 }

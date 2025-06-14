@@ -13,9 +13,24 @@ use App\Http\Controllers\Website\UserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\AppCredentialController;
+use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\FacebookLoginController;
 
 // middleware
 use App\Http\Middleware\AuthenticatedMiddleware;
+
+
+
+// authentication with google
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'googleLogin']);
+Route::post('/change/google/login-credential', [GoogleLoginController::class, 'changeGoogleLoginCredential']);
+
+//  authentication with facebook
+Route::get('/auth/facebook', [FacebookLoginController::class, 'redirectToFacebook'])->name('auth.facebook');
+Route::get('/auth/facebook/callback', [FacebookLoginController::class, 'facebookLogin']);
+Route::post('/change/facebook/login-credential', [FacebookLoginController::class, 'changeFacebookLoginCredential']);
 
 
 Route::get('/', [EcommerceController::class, 'index'])->name('home');
@@ -60,6 +75,8 @@ Route::resource('/products', ProductController::class);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+// credential
+Route::get('/app-credential', [AppCredentialController::class, 'index'])->name('app.credential');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
